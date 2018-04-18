@@ -2,8 +2,6 @@ package lo4connectiontest;
 
 import ag.ion.bion.officelayer.application.IOfficeApplication;
 import ag.ion.bion.officelayer.util.OfficeLoader;
-import de.peloba.documents.libreoffice.LoConnector;
-import de.peloba.documents.libreoffice.LoConnector.Context;
 import java.util.HashMap;
 
 public class Lo4ConnectionTest {
@@ -34,7 +32,6 @@ public class Lo4ConnectionTest {
       com.sun.star.uno.XComponentContext xContext = null;
 
       try {
-
 
         // get the remote office component context
         xContext = com.sun.star.comp.helper.Bootstrap.bootstrap();
