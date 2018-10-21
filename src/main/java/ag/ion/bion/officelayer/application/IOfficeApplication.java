@@ -38,77 +38,74 @@
  */
 package ag.ion.bion.officelayer.application;
 
+import java.util.Map;
+
 import ag.ion.bion.officelayer.IDisposeable;
 import ag.ion.bion.officelayer.desktop.IDesktopService;
 import ag.ion.bion.officelayer.document.IDocumentService;
 import ag.ion.bion.officelayer.runtime.IOfficeProgressMonitor;
 import ag.ion.noa.service.IServiceProvider;
-import java.util.Map;
 
 /**
  * OpenOffice.org application.
- *
+ * 
  * @author Andreas Bröker
  * @version $Revision: 11684 $
  */
 public interface IOfficeApplication extends IDisposeable {
 
-  /**
-   * Configuration key for the application type.
-   */
+  /** Configuration key for the application type. */
   public static final String APPLICATION_TYPE_KEY = "type";
-  /**
-   * Configuration key for the application host (only for remote applications).
-   */
+  /** Configuration key for the application host (only for remote applications). */
   public static final String APPLICATION_HOST_KEY = "host";
-  /**
-   * Configuration key for the application port (only for remote applications).
-   */
+  /** Configuration key for the application port (only for remote applications). */
   public static final String APPLICATION_PORT_KEY = "port";
-  /**
-   * Configuration key for the application home path (only for local applications).
-   */
+  /** Configuration key for the application home path (only for local applications). */
   public static final String APPLICATION_HOME_KEY = "home";
-  /**
-   * Configuration key for the application arguments (only for local applications). <br> Value must
-   * be of type string array String[]!<br><br>
+  /** 
+   * Configuration key for the application arguments (only for local applications).<br>
+   * Value must be of type string array String[]!<br><br>
+   * If not set, default options will be used @see com.sun.star.comp.helper.Bootstrap#getDefaultOptions()<br>
+   * You can also use the default list provided by {@link com.sun.star.comp.helper.Bootstrap#getDefaultOptions()}<br>
+   * and change it to fit your needs, for example:<br><br>
+   * List list = Array.asList(Bootstrap.getDefaultOptions());<br>
+   * list.remove("--nologo");<br>
+   * list.add("--invisible ");<br>
+   * configuration.put(IOfficeApplication.APPLICATION_ARGUMENTS_KEY, list.toArray(new String[list.size()]));<br>
    */
   public static final String APPLICATION_ARGUMENTS_KEY = "arguments";
 
-  /**
-   * Configuration value for a remote application.
-   */
-  public static final String REMOTE_APPLICATION = "remote";
-  /**
-   * Configuration value for a local application.
-   */
-  public static final String LOCAL_APPLICATION = "local";
+  /** Configuration value for a remote application. */
+  public static final String REMOTE_APPLICATION   = "remote";
+  /** Configuration value for a local application. */
+  public static final String LOCAL_APPLICATION    = "local";
 
-  /**
-   * Java system property key for NOA natvie library path
-   */
-  public static final String NOA_NATIVE_LIB_PATH = "noa.native.lib.path";
+  /**Java system property key for NOA natvie library path */
+  public static final String NOA_NATIVE_LIB_PATH  = "noa.native.lib.path";
 
   //----------------------------------------------------------------------------
-
   /**
    * Sets configuration of the office application.
-   *
+   * 
    * @param officeApplicationConfiguration configuration of the office application
+   * 
    * @throws OfficeApplicationException if the submitted configuration is not valid
+   * 
    * @author Andreas Bröker
+   * 
    * @deprecated Use setConfiguration(Map configuration) instead.
    */
   public void setConfiguration(IOfficeApplicationConfiguration officeApplicationConfiguration)
       throws OfficeApplicationException;
 
   //----------------------------------------------------------------------------
-
   /**
    * Sets configuration of the office application.
-   *
+   * 
    * @param configuration configuration map to be used
+   * 
    * @throws OfficeApplicationException if the configuration is not complete
+   * 
    * @author Andreas Bröker
    */
   public void setConfiguration(Map configuration) throws OfficeApplicationException;
